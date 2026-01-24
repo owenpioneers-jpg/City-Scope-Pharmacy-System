@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Evidence</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<nav class="navbar">
+  <div class="logo">Pharmacy System</div>
+
+  <div class="menu-toggle" id="mobile-menu">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+
+  <ul class="nav-links">
+  
+  </ul>
+</nav>
+
+<script src="js/navbar.js"></script>
+
+<div class="signup-box">
+
+  <h2>Patient Evidence</h2>
+
+  <h3 id="patientName"></h3>
+
+  <form id="evidenceForm">
+
+    <textarea id="note" placeholder="Write evidence / observation" required></textarea>
+
+    <br><br>
+
+    <button type="submit">Save Evidence</button>
+
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Date</th>
+        <th>Note</th>
+      </tr>
+    </thead>
+
+    <tbody id="evidenceTable"></tbody>
+  </table>
+
+</div>
+
+<script src="js/evidence.js"></script>
+<script src="js/protect.js"></script>
+<footer class="footer">
+  <div class="footer-content">
+
+    <div>
+      <h3>City Scope Pharmacy System</h3>
+      <p>Your digital health partner.</p>
+    </div>
+
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </div>
+
+    <div>
+      <h4>Contact</h4>
+      <p>Email: cityscope@pharmacy.com</p>
+      <p>Phone: +254 115 185 085</p>
+    </div>
+
+  </div>
+
+  <p class="copy">© 2026 City Scope Pharmacy System. All rights reserved.</p>
+</footer>
+
+
+</body>
+</html>

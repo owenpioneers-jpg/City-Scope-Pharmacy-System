@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>City Scope Pharmacy</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="index-page">
+
+<nav class="navbar">
+  <div class="logo">City Scope Pharmacy</div>
+
+  <div class="menu-toggle" id="mobile-menu">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li class="guest-link"><a href="signup.html">Sign Up</a></li>
+    <li class="guest-link"><a href="login.html">Login</a></li>
+    <li class="user-link" style="display:none;"><a href="#" id="dashboardLink">Dashboard</a></li>
+    <li class="user-link" style="display:none;"><a href="#" id="logoutBtn">Logout</a></li>
+  </ul>
+</nav>
+
+<div class="index-box">
+  <h1>Welcome to City Scope Pharmacy System</h1>
+  <p><strong>A simple system to manage patients, doctors, and prescriptions in real time.</strong></p>
+</div>
+
+<section class="about">
+  <h2>Why Use Our Pharmacy System?</h2>
+  <div class="about-grid">
+    <div class="card">
+      <h3>Fast Records</h3>
+      <p>Store patient information and prescriptions in seconds without paperwork.</p>
+    </div>
+    <div class="card">
+      <h3>Secure Data</h3>
+      <p>All medical records are safely stored and accessible only to authorized doctors.</p>
+    </div>
+    <div class="card">
+      <h3>Easy Access</h3>
+      <p>Doctors and patients can view history anytime from anywhere.</p>
+    </div>
+  </div>
+</section>
+
+<section class="reviews">
+  <h2>What Our Users Say</h2>
+  <div class="slider-container">
+    <div class="review-slide active">
+      <p>"This system has helped me manage my patients easily."</p>
+      <strong>- Dr. Kabibi ⭐⭐⭐⭐⭐</strong>
+    </div>
+    <div class="review-slide">
+      <p>"I can now track my prescriptions without stress."</p>
+      <strong>- Patient Nyorwa ⭐⭐⭐⭐</strong>
+    </div>
+    <div class="review-slide">
+      <p>"Very simple and effective pharmacy platform."</p>
+      <strong>- DR. Owen ⭐⭐⭐⭐⭐</strong>
+    </div>
+    <div class="review-slide">
+      <p>"Appointments and prescriptions are now very organized."</p>
+      <strong>- Dr. Remmie Mwatee ⭐⭐⭐⭐⭐</strong>
+    </div>
+  </div>
+
+  <div class="slider-controls">
+    <button onclick="prevSlide()">❮</button>
+    <button onclick="nextSlide()">❯</button>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div>
+      <h3>City Scope Pharmacy System</h3>
+      <p>Your digital health partner.</p>
+    </div>
+    <div class="footer-links">
+  <h4 id="quickLinksToggle" class="quick-links-title">
+    Quick Links ▾
+  </h4>
+
+  <ul id="quickLinksMenu" class="quick-links-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="signup.html">Sign Up</a></li>
+    <li><a href="login.html">Login</a></li>
+  </ul>
+</div>
+    <div>
+      <h4>Contact</h4>
+      <p>Email: cityscopepharmacy@gmail.com</p>
+      <p>Phone: +254 115185085</p>
+    </div>
+  </div>
+  <p class="copy">© 2025 City Scope Pharmacy System. All rights reserved.</p>
+</footer>
+
+<script src="js/navbar.js"></script>
+<script src="js/reviews.js"></script>
+<script>
+  
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  const dashboardLink = document.getElementById("dashboardLink");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const guestLinks = document.querySelectorAll(".guest-link");
+  const userLinks = document.querySelectorAll(".user-link");
+
+  if (currentUser) {
+    guestLinks.forEach(el => el.style.display = "none");
+    userLinks.forEach(el => el.style.display = "block");
+    dashboardLink.href = currentUser.role === "doctor" ? "doctor-dashboard.html" : "patient-dashboard.html";
+
+    logoutBtn.addEventListener("click", () => {
+      localStorage.removeItem("currentUser");
+      window.location.href = "index.html";
+    });
+  }
+</script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const toggle = document.getElementById("quickLinksToggle");
+  const menu = document.getElementById("quickLinksMenu");
+
+  if (!toggle || !menu) return;
+
+  toggle.addEventListener("click", () => {
+    menu.classList.toggle("show");
+
+    toggle.innerHTML = menu.classList.contains("show")
+      ? "Quick Links ▴"
+      : "Quick Links ▾";
+  });
+});
+</script>
+</body>
+</html>

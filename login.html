@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="login-page">
+
+  <nav class="navbar">
+    <div class="logo">City Scope Pharmacy System</div>
+
+    <div class="menu-toggle" id="mobile-menu">
+      <span class="bar"></span>
+      <span class="bar"></span>
+      <span class="bar"></span>
+    </div>
+
+    <ul class="nav-links">
+    
+    </ul>
+  </nav>
+
+ 
+  <div class="signup-box">
+
+    <h2>Login</h2>
+
+    <form id="loginForm">
+      <input type="email"
+             id="email"
+             name="email"
+             placeholder="Email"
+             autocomplete="email"
+             required>
+
+      <input type="password"
+             id="password"
+             name="password"
+             placeholder="Password"
+             autocomplete="current-password"
+             required>
+
+          <label style="color:white; font-size:14px;">
+  <input type="checkbox" id="showPass"> Show Password
+          </label>   
+
+      <button type="submit">Login</button>
+    </form>
+    <p><a href="forgot-password.html">Forgot Password?</a></p>
+
+
+    <p>
+      No account? <a href="signup.html">Sign Up</a>
+    </p>
+
+  </div>
+
+ 
+  <script src="js/navbar.js"></script>
+  <script src="js/auth.js"></script>
+
+</body>
+</html>

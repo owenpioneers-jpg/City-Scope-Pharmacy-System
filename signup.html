@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+ <div class="signup-box">
+
+  <h2>Sign Up</h2>
+
+  <form id="signupForm">
+
+    <input type="text"
+           id="name"
+           name="name"
+           placeholder="Full Name"
+           autocomplete="name"
+           required><br><br>
+
+    <input type="email"
+           id="email"
+           name="email"
+           placeholder="Email"
+           autocomplete="email"
+           required><br><br>
+
+    <input type="password"
+           id="password"
+           name="password"
+           placeholder="Password"
+           autocomplete="new-password"
+           required><br><br>
+
+    <select id="role"
+            name="role"
+            autocomplete="off">
+      <option value="patient">Patient</option>
+      <option value="doctor">Doctor</option>
+    </select>
+
+    <br><br>
+
+    <button type="submit">Create Account</button>
+
+  </form>
+  <p style="margin-top: 15px; text-align: center;">
+  Already registered? 
+  <a href="login.html" style="color:#39ec7e; font-weight:bold;">
+    Login here
+  </a>
+</p>
+ </div> 
+
+  <script src="js/auth.js"></script>
+
+</body>
+</html>

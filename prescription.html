@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Prescriptions</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="prescription">
+    <nav class="navbar">
+  <div class="logo">City Scope Pharmacy System</div>
+
+  <div class="menu-toggle" id="mobile-menu">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+
+  <ul class="nav-links">
+  
+  </ul>
+</nav>
+
+<script src="js/navbar.js"></script>
+
+<div class="signup-box">
+
+  <h2>Patient Prescriptions</h2>
+
+  <h3 id="patientName"></h3>
+
+  <form id="addPrescriptionForm">
+
+    <input type="text" id="medicine" placeholder="Medicine Name" required><br><br>
+    <input type="text" id="dosage" placeholder="Dosage / Instructions" required><br><br>
+    <button type="submit">Add Prescription</button>
+
+  </form>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Medicine</th>
+        <th>Dosage</th>
+        <th>Taken?</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="prescriptionTable">
+    
+    </tbody>
+  </table>
+
+</div>
+
+<script src="js/prescription.js"></script>
+<script src="js/protect.js"></script>
+<footer class="footer">
+  <div class="footer-content">
+
+    <div>
+      <h3>City Scope Pharmacy System</h3>
+      <p>Your digital health partner.</p>
+    </div>
+
+    <div class="footer-links">
+  <h4 id="quickLinksToggle" class="quick-links-title">
+    Quick Links ▾
+  </h4>
+
+  <ul id="quickLinksMenu" class="quick-links-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="signup.html">Sign Up</a></li>
+    <li><a href="login.html">Login</a></li>
+  </ul>
+</div>
+
+    <div>
+      <h4>Contact</h4>
+      <p>Email: cityscope@pharmacy.com</p>
+      <p>Phone: +254 115 185 085</p>
+    </div>
+
+  </div>
+
+  <p class="copy">© 2026 City Scope Pharmacy System. All rights reserved.</p>
+</footer>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const toggle = document.getElementById("quickLinksToggle");
+  const menu = document.getElementById("quickLinksMenu");
+
+  if (!toggle || !menu) return;
+
+  toggle.addEventListener("click", () => {
+    menu.classList.toggle("show");
+
+    toggle.innerHTML = menu.classList.contains("show")
+      ? "Quick Links ▴"
+      : "Quick Links ▾";
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body class="doctor-dashboard">
+  <div class="logged-doctor">
+    Logged in as: <strong id="doctorName"></strong>
+  </div>
+
+<nav class="navbar">
+  <div class="logo">City Scope Pharmacy System</div>
+
+  <div class="menu-toggle" id="mobile-menu">
+    <span class="bar"></span>
+    <span class="bar"></span>
+    <span class="bar"></span>
+  </div>
+
+  <ul class="nav-links">
+     
+  </ul>
+</nav>
+
+<script src="js/navbar.js"></script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  if (!currentUser) {
+    alert("Please login first!");
+    window.location.href = "login.html";
+    return;
+  }
+
+  
+  if (currentUser.role !== "doctor") {
+    alert("Access denied: Doctors only");
+    window.location.href = "login.html";
+    return;
+  }
+
+  
+  const doctorNameSpan = document.getElementById("doctorName");
+  if (doctorNameSpan) doctorNameSpan.textContent = currentUser.name;
+});
+</script>
+
+
+<div class="signup-box">
+
+  <h2>Doctor Dashboard</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Phone</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+
+    <tbody id="doctorPatientTable">
+  
+    </tbody>
+  </table>
+
+</div>
+
+<script src="js/doctors.js"></script>
+<script src="js/protect.js"></script>
+
+<footer class="footer">
+  <div class="footer-content">
+
+    <div>
+      <h3>City Scope Pharmacy System</h3>
+      <p>Your digital health partner.</p>
+    </div>
+
+      <div class="footer-links">
+  <h4 id="quickLinksToggle" class="quick-links-title">
+    Quick Links ▾
+  </h4>
+
+  <ul id="quickLinksMenu" class="quick-links-menu">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="signup.html">Sign Up</a></li>
+    <li><a href="login.html">Login</a></li>
+  </ul>
+</div>
+
+    <div>
+      <h4>Contact</h4>
+      <p>Email: cityscope@pharmacy.com</p>
+      <p>Phone: +254 115 185 085</p>
+    </div>
+
+  </div>
+
+  <p class="copy">© 2026 City Scope Pharmacy System. All rights reserved.</p>
+</footer>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const toggle = document.getElementById("quickLinksToggle");
+  const menu = document.getElementById("quickLinksMenu");
+
+  if (!toggle || !menu) return;
+
+  toggle.addEventListener("click", () => {
+    menu.classList.toggle("show");
+
+    toggle.innerHTML = menu.classList.contains("show")
+      ? "Quick Links ▴"
+      : "Quick Links ▾";
+  });
+});
+</script>
+</body>
+</html>
