@@ -1,90 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Patient Evidence</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Patient Evidence — City Scope Pharmacy</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
 <nav class="navbar">
-  <div class="logo">Pharmacy System</div>
-
+  <div class="logo">City Scope Pharmacy</div>
   <div class="menu-toggle" id="mobile-menu">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
   </div>
-
-  <ul class="nav-links">
-  
-  </ul>
+  <ul class="nav-links"></ul>
 </nav>
 
-<script src="js/navbar.js"></script>
+<div class="page-wrapper">
+  <p class="section-label">Clinical Evidence</p>
+  <h2 class="page-heading">Evidence: <span id="patientName" style="color:var(--teal)">—</span></h2>
+  <p class="page-subheading">Log clinical observations and notes for this patient's records.</p>
 
-<div class="signup-box">
+  <div style="display:grid;grid-template-columns:1fr 1.8fr;gap:24px;align-items:start">
 
-  <h2>Patient Evidence</h2>
-
-  <h3 id="patientName"></h3>
-
-  <form id="evidenceForm">
-
-    <textarea id="note" placeholder="Write evidence / observation" required></textarea>
-
-    <br><br>
-
-    <button type="submit">Save Evidence</button>
-
-  </form>
-
-  <table>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Date</th>
-        <th>Note</th>
-      </tr>
-    </thead>
-
-    <tbody id="evidenceTable"></tbody>
-  </table>
-
-</div>
-
-<script src="js/evidence.js"></script>
-<script src="js/protect.js"></script>
-<footer class="footer">
-  <div class="footer-content">
-
-    <div>
-      <h3>City Scope Pharmacy System</h3>
-      <p>Your digital health partner.</p>
+    <!-- Form -->
+    <div class="glass-card">
+      <h3 style="font-family:'Sora',sans-serif;font-size:16px;font-weight:600;color:var(--white);margin-bottom:20px">New Observation</h3>
+      <form id="evidenceForm">
+        <div class="form-group">
+          <label>Clinical Note / Observation</label>
+          <textarea id="note" placeholder="Describe symptoms, observations, or clinical findings..." required style="min-height:140px"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Save Evidence →</button>
+      </form>
     </div>
 
+    <!-- Table -->
+    <div class="glass-card" style="padding:0;overflow:hidden">
+      <div style="padding:20px 24px;border-bottom:1px solid var(--border-dim)">
+        <h3 style="font-family:'Sora',sans-serif;font-size:16px;font-weight:600;color:var(--white)">Evidence Log</h3>
+      </div>
+      <div class="table-wrapper" style="margin:0;border:none;border-radius:0">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Date & Time</th><th>Observation</th>
+            </tr>
+          </thead>
+          <tbody id="evidenceTable"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <div class="logo-mark">City Scope Pharmacy System</div>
+      <p>Your trusted digital health partner.</p>
+    </div>
     <div>
       <h4>Quick Links</h4>
       <ul>
         <li><a href="index.html">Home</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="contact.html">Doctors</a></li>
         <li><a href="login.html">Login</a></li>
       </ul>
     </div>
-
-    <div>
+    <div class="footer-contact">
       <h4>Contact</h4>
-      <p>Email: cityscope@pharmacy.com</p>
-      <p>Phone: +254 115 185 085</p>
+      <p>📧 cityscope@pharmacy.com</p>
+      <p>📞 +254 115 185 085</p>
     </div>
-
   </div>
-
   <p class="copy">© 2026 City Scope Pharmacy System. All rights reserved.</p>
 </footer>
 
+<script src="js/navbar.js"></script>
+<script src="js/protect.js"></script>
+<script src="js/evidence.js"></script>
 
+<style>
+@media (max-width: 760px) {
+  .page-wrapper > div[style*="grid"] { grid-template-columns: 1fr !important; }
+}
+</style>
 </body>
 </html>
