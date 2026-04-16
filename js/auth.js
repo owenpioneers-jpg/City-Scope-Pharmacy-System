@@ -4,77 +4,57 @@ const approvedDoctors = [
   "drkabibimwendah@gmail.com"
 ];
 
-function getUsers() {
-  return JSON.parse(localStorage.getItem("users")) || [];
-}
+function getUsers() { return JSON.parse(localStorage.getItem("users")) || []; }
+function saveUsers(u) { localStorage.setItem("users", JSON.stringify(u)); }
 
-function saveUsers(users) {
-  localStorage.setItem("users", JSON.stringify(users));
-}
-
+// ── Signup ──────────────────────────────────────────────────────
 const signupForm = document.getElementById("signupForm");
 if (signupForm) {
   signupForm.addEventListener("submit", function (e) {
     e.preventDefault();
-
-    const name = document.getElementById("name").value.trim();
-    const email = document.getElementById("email").value.trim();
+    const name     = document.getElementById("name").value.trim();
+    const email    = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
-    let role = document.getElementById("role").value;
-
-    const users = getUsers();
+    let   role     = document.getElementById("role").value;
+    const users    = getUsers();
 
     if (users.some(u => u.email === email)) {
-      alert("Email already registered!");
-      return;
+      showToast("Email already registered!", "error"); return;
     }
-
     if (role === "doctor" && !approvedDoctors.includes(email)) {
-      alert("You are not authorized as doctor.");
+      showToast("Not an approved doctor email. Registered as patient.", "error");
       role = "patient";
     }
-
     const newUser = { name, email, password, role };
-
     users.push(newUser);
     saveUsers(users);
-
     localStorage.setItem("currentUser", JSON.stringify(newUser));
     window.location.href = role === "doctor" ? "doctor-dashboard.html" : "patient-dashboard.html";
   });
 }
 
+// ── Login ───────────────────────────────────────────────────────
 const loginForm = document.getElementById("loginForm");
 if (loginForm) {
   loginForm.addEventListener("submit", function (e) {
     e.preventDefault();
-
-    const email = document.getElementById("email").value.trim();
+    const email    = document.getElementById("email").value.trim();
     const password = document.getElementById("password").value.trim();
-
-    const users = getUsers();
-    const user = users.find(u => u.email === email && u.password === password);
-
-    if (!user) {
-      alert("Invalid email or password!");
-      return;
-    }
-
+    const user     = getUsers().find(u => u.email === email && u.password === password);
+    if (!user) { showToast("Invalid email or password!", "error"); return; }
     localStorage.setItem("currentUser", JSON.stringify(user));
-    alert("Login successful!");
-    window.location.href = user.role === "doctor" ? "doctor-dashboard.html" : "patient-dashboard.html";
+    showToast("Welcome back, " + user.name + "!");
+    setTimeout(() => {
+      window.location.href = user.role === "doctor" ? "doctor-dashboard.html" : "patient-dashboard.html";
+    }, 900);
   });
 }
 
-function logout() {
-  localStorage.removeItem("currentUser");
-  window.location.href = "login.html";
-}
-
+// ── Show/Hide password ──────────────────────────────────────────
 const showPass = document.getElementById("showPass");
-const passwordInput = document.getElementById("password");
-if (showPass && passwordInput) {
+const passInput = document.getElementById("password");
+if (showPass && passInput) {
   showPass.addEventListener("change", function () {
-    passwordInput.type = this.checked ? "text" : "password";
+    passInput.type = this.checked ? "text" : "password";
   });
 }
