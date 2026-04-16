@@ -1,106 +1,94 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-   <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Patient Prescriptions</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prescriptions — City Scope Pharmacy</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body class="prescription">
-    <nav class="navbar">
-  <div class="logo">City Scope Pharmacy System</div>
 
+<nav class="navbar">
+  <div class="logo">City Scope Pharmacy</div>
   <div class="menu-toggle" id="mobile-menu">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
   </div>
-
-  <ul class="nav-links">
-  
-  </ul>
+  <ul class="nav-links"></ul>
 </nav>
 
-<script src="js/navbar.js"></script>
+<div class="page-wrapper">
+  <p class="section-label">Prescriptions</p>
+  <h2 class="page-heading">Patient: <span id="patientName" style="color:var(--teal)">—</span></h2>
+  <p class="page-subheading">Manage and track prescriptions for this patient.</p>
 
-<div class="signup-box">
+  <div style="display:grid;grid-template-columns:1fr 1.8fr;gap:24px;align-items:start">
 
-  <h2>Patient Prescriptions</h2>
-
-  <h3 id="patientName"></h3>
-
-  <form id="addPrescriptionForm">
-
-    <input type="text" id="medicine" placeholder="Medicine Name" required><br><br>
-    <input type="text" id="dosage" placeholder="Dosage / Instructions" required><br><br>
-    <button type="submit">Add Prescription</button>
-
-  </form>
-
-  <table>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Medicine</th>
-        <th>Dosage</th>
-        <th>Taken?</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-    <tbody id="prescriptionTable">
-    
-    </tbody>
-  </table>
-
-</div>
-
-<script src="js/prescription.js"></script>
-<script src="js/protect.js"></script>
-<footer class="footer">
-  <div class="footer-content">
-
-    <div>
-      <h3>City Scope Pharmacy System</h3>
-      <p>Your digital health partner.</p>
+    <!-- Add form (doctor only) -->
+    <div class="glass-card" id="prescriptionFormCard">
+      <h3 style="font-family:'Sora',sans-serif;font-size:16px;font-weight:600;color:var(--white);margin-bottom:20px">Add Prescription</h3>
+      <form id="addPrescriptionForm">
+        <div class="form-group">
+          <label>Medicine Name</label>
+          <input type="text" id="medicine" placeholder="e.g. Amoxicillin 500mg" required>
+        </div>
+        <div class="form-group">
+          <label>Dosage / Instructions</label>
+          <input type="text" id="dosage" placeholder="e.g. 1 tablet, 3x daily for 7 days" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full" style="margin-top:8px">Add Prescription →</button>
+      </form>
     </div>
 
-    <div class="footer-links">
-  <h4 id="quickLinksToggle" class="quick-links-title">
-    Quick Links ▾
-  </h4>
-
-  <ul id="quickLinksMenu" class="quick-links-menu">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="signup.html">Sign Up</a></li>
-    <li><a href="login.html">Login</a></li>
-  </ul>
-</div>
-
-    <div>
-      <h4>Contact</h4>
-      <p>Email: cityscope@pharmacy.com</p>
-      <p>Phone: +254 115 185 085</p>
+    <!-- Table -->
+    <div class="glass-card" style="padding:0;overflow:hidden">
+      <div style="padding:20px 24px;border-bottom:1px solid var(--border-dim)">
+        <h3 style="font-family:'Sora',sans-serif;font-size:16px;font-weight:600;color:var(--white)">Prescription History</h3>
+      </div>
+      <div class="table-wrapper" style="margin:0;border:none;border-radius:0">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Medicine</th><th>Dosage</th><th>Status</th><th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="prescriptionTable"></tbody>
+        </table>
+      </div>
     </div>
 
   </div>
+</div>
 
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-brand">
+      <div class="logo-mark">City Scope Pharmacy System</div>
+      <p>Your trusted digital health partner.</p>
+    </div>
+    <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
+      <h4>Contact</h4>
+      <p>📧 cityscope@pharmacy.com</p>
+      <p>📞 +254 115 185 085</p>
+    </div>
+  </div>
   <p class="copy">© 2026 City Scope Pharmacy System. All rights reserved.</p>
 </footer>
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const toggle = document.getElementById("quickLinksToggle");
-  const menu = document.getElementById("quickLinksMenu");
 
-  if (!toggle || !menu) return;
+<script src="js/navbar.js"></script>
+<script src="js/protect.js"></script>
+<script src="js/prescription.js"></script>
 
-  toggle.addEventListener("click", () => {
-    menu.classList.toggle("show");
-
-    toggle.innerHTML = menu.classList.contains("show")
-      ? "Quick Links ▴"
-      : "Quick Links ▾";
-  });
-});
-</script>
+<style>
+@media (max-width: 760px) {
+  .page-wrapper > div[style*="grid"] { grid-template-columns: 1fr !important; }
+}
+</style>
 </body>
 </html>
