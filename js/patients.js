@@ -1,47 +1,25 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const patientTable = document.getElementById("patientTable");
-  const addPatientForm = document.getElementById("addPatientForm");
+  const table = document.getElementById("patientTable");
+  if (!table) return;
 
-  let patientsList = JSON.parse(localStorage.getItem("patients")) || [];
+  const patients = JSON.parse(localStorage.getItem("patients")) || [];
+  const statEl = document.getElementById("totalPatients");
+  if (statEl) statEl.textContent = patients.length;
 
-  function renderPatients() {
-    if (!patientTable) return;
-    patientTable.innerHTML = "";
-
-    patientsList.forEach((p, index) => {
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${index + 1}</td>
-        <td>${p.name}</td>
-        <td>${p.email}</td>
-        <td>${p.age}</td>
-        <td>${p.phone}</td>
-        <td>${p.address}</td>
-      `;
-      patientTable.appendChild(row);
-    });
+  if (patients.length === 0) {
+    table.innerHTML = `<tr><td colspan="6" class="empty-state"><div class="empty-icon">🧑‍🤝‍🧑</div>No patients registered yet.</td></tr>`;
+    return;
   }
-
-  renderPatients();
-
-  if (addPatientForm) {
-    addPatientForm.addEventListener("submit", function (e) {
-      e.preventDefault();
-
-      const name = document.getElementById("name").value;
-      const email = document.getElementById("email").value;
-      const age = document.getElementById("age").value;
-      const phone = document.getElementById("phone").value;
-      const address = document.getElementById("address").value;
-
-      const newPatient = { name, email, age, phone, address };
-
-      patientsList.push(newPatient);
-      localStorage.setItem("patients", JSON.stringify(patientsList));
-
-      addPatientForm.reset();
-      renderPatients();
-      alert("Patient added successfully!");
-    });
-  }
+  patients.forEach((p, i) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${i + 1}</td>
+      <td style="color:var(--white);font-weight:500">${p.name}</td>
+      <td>${p.email || "—"}</td>
+      <td>${p.age || "—"}</td>
+      <td>${p.phone || "—"}</td>
+      <td>${p.address || "—"}</td>
+    `;
+    table.appendChild(row);
+  });
 });
