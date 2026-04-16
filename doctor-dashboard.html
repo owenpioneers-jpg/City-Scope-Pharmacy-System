@@ -1,129 +1,136 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Doctor Dashboard</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Doctor Dashboard — City Scope Pharmacy</title>
   <link rel="stylesheet" href="style.css">
 </head>
-
 <body class="doctor-dashboard">
-  <div class="logged-doctor">
-    Logged in as: <strong id="doctorName"></strong>
-  </div>
 
 <nav class="navbar">
-  <div class="logo">City Scope Pharmacy System</div>
-
+  <div class="logo">City Scope Pharmacy</div>
   <div class="menu-toggle" id="mobile-menu">
-    <span class="bar"></span>
-    <span class="bar"></span>
-    <span class="bar"></span>
+    <span class="bar"></span><span class="bar"></span><span class="bar"></span>
   </div>
-
-  <ul class="nav-links">
-     
-  </ul>
+  <ul class="nav-links"></ul>
 </nav>
 
-<script src="js/navbar.js"></script>
-
-
-<script>
-document.addEventListener("DOMContentLoaded", function() {
-  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
-
-  if (!currentUser) {
-    alert("Please login first!");
-    window.location.href = "login.html";
-    return;
-  }
-
-  
-  if (currentUser.role !== "doctor") {
-    alert("Access denied: Doctors only");
-    window.location.href = "login.html";
-    return;
-  }
-
-  
-  const doctorNameSpan = document.getElementById("doctorName");
-  if (doctorNameSpan) doctorNameSpan.textContent = currentUser.name;
-});
-</script>
-
-
-<div class="signup-box">
-
-  <h2>Doctor Dashboard</h2>
-
-  <table>
-    <thead>
-      <tr>
-        <th>#</th>
-        <th>Name</th>
-        <th>Email</th>
-        <th>Age</th>
-        <th>Phone</th>
-        <th>Action</th>
-      </tr>
-    </thead>
-
-    <tbody id="doctorPatientTable">
-  
-    </tbody>
-  </table>
-
+<div class="doctor-banner" id="doctorBanner" style="display:none">
+  <span>👨‍⚕️ Logged in as <strong id="doctorName">—</strong></span>
+  <a href="add-patient.html" class="btn btn-primary btn-sm">+ Add Patient</a>
 </div>
 
-<script src="js/doctors.js"></script>
-<script src="js/protect.js"></script>
+<div class="page-wrapper" style="padding-top:32px">
+  <p class="section-label">Doctor Dashboard</p>
+  <h2 class="page-heading">Patient Records</h2>
+  <p class="page-subheading">Manage prescriptions and clinical evidence for all registered patients.</p>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Total Patients</div>
+      <div class="stat-value" id="totalPatients">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Active Prescriptions</div>
+      <div class="stat-value" id="activePrescriptions">—</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Evidence Notes</div>
+      <div class="stat-value" id="totalEvidence">—</div>
+    </div>
+  </div>
+
+  <div class="glass-card" style="padding:0;overflow:hidden">
+    <div class="table-wrapper" style="margin:0;border:none;border-radius:0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Age</th>
+            <th>Phone</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="doctorPatientTable"></tbody>
+      </table>
+    </div>
+  </div>
+</div>
 
 <footer class="footer">
   <div class="footer-content">
-
-    <div>
-      <h3>City Scope Pharmacy System</h3>
-      <p>Your digital health partner.</p>
+    <div class="footer-brand">
+      <div class="logo-mark">City Scope Pharmacy System</div>
+      <p>Your trusted digital health partner.</p>
     </div>
-
-      <div class="footer-links">
-  <h4 id="quickLinksToggle" class="quick-links-title">
-    Quick Links ▾
-  </h4>
-
-  <ul id="quickLinksMenu" class="quick-links-menu">
-    <li><a href="index.html">Home</a></li>
-    <li><a href="signup.html">Sign Up</a></li>
-    <li><a href="login.html">Login</a></li>
-  </ul>
-</div>
-
     <div>
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="doctor-dashboard.html">Dashboard</a></li>
+        <li><a href="add-patient.html">Add Patient</a></li>
+        <li><a href="contact.html">Doctors</a></li>
+      </ul>
+    </div>
+    <div class="footer-contact">
       <h4>Contact</h4>
-      <p>Email: cityscope@pharmacy.com</p>
-      <p>Phone: +254 115 185 085</p>
+      <p>📧 cityscope@pharmacy.com</p>
+      <p>📞 +254 115 185 085</p>
     </div>
-
   </div>
-
   <p class="copy">© 2026 City Scope Pharmacy System. All rights reserved.</p>
 </footer>
+
+<script src="js/navbar.js"></script>
+<script src="js/protect.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-  const toggle = document.getElementById("quickLinksToggle");
-  const menu = document.getElementById("quickLinksMenu");
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+  if (!currentUser || currentUser.role !== "doctor") {
+    showToast("Access denied: Doctors only", "error");
+    window.location.href = "login.html"; return;
+  }
+  const nameEl = document.getElementById("doctorName");
+  if (nameEl) nameEl.textContent = currentUser.name;
+  const banner = document.getElementById("doctorBanner");
+  if (banner) { banner.style.display = "flex"; document.body.classList.add("has-banner"); }
 
-  if (!toggle || !menu) return;
+  const patients = JSON.parse(localStorage.getItem("patients")) || [];
+  const evidences = JSON.parse(localStorage.getItem("evidences")) || [];
+  let activePres = 0;
+  patients.forEach(p => { if (p.prescriptions) activePres += p.prescriptions.filter(x => !x.taken).length; });
 
-  toggle.addEventListener("click", () => {
-    menu.classList.toggle("show");
+  document.getElementById("totalPatients").textContent = patients.length;
+  document.getElementById("activePrescriptions").textContent = activePres;
+  document.getElementById("totalEvidence").textContent = evidences.length;
 
-    toggle.innerHTML = menu.classList.contains("show")
-      ? "Quick Links ▴"
-      : "Quick Links ▾";
+  const table = document.getElementById("doctorPatientTable");
+  if (patients.length === 0) {
+    table.innerHTML = `<tr><td colspan="6" class="empty-state"><div class="empty-icon">🧑‍⚕️</div>No patients yet. <a href="add-patient.html" style="color:var(--teal)">Add the first one →</a></td></tr>`;
+    return;
+  }
+  patients.forEach((p, index) => {
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${index + 1}</td>
+      <td style="color:var(--white);font-weight:500">${p.name}</td>
+      <td>${p.email || "—"}</td>
+      <td>${p.age || "—"}</td>
+      <td>${p.phone || "—"}</td>
+      <td style="display:flex;gap:8px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px">
+        <button class="btn btn-primary btn-sm" onclick="openPrescriptions(${index})">💊 Prescriptions</button>
+        <button class="btn btn-sm" style="background:rgba(255,179,71,0.12);color:var(--amber);border:1px solid rgba(255,179,71,0.25)" onclick="openEvidence(${index})">📋 Evidence</button>
+      </td>
+    `;
+    table.appendChild(row);
   });
 });
+
+function openPrescriptions(i) { localStorage.setItem("currentPatientIndex", i); window.location.href = "prescription.html"; }
+function openEvidence(i) { localStorage.setItem("currentPatientIndex", i); window.location.href = "evidence.html"; }
 </script>
 </body>
 </html>
